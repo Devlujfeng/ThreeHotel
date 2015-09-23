@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode url="" title="Home"  description="">
+        <siteMapNode url="~/Pages/RoomReservations-input.aspx" title="Room Reservation"  description="" />
+        <siteMapNode url="~/Pages/AboutHotel.aspx" title="About The Hotel"  description="" />
+        <siteMapNode url="~/Pages/RoomsAndSuites.aspx" title="Rooms &amp; Suites"  description="" >
+          <siteMapNode url="~/Pages/HorizonCityView.aspx" title="Horizon City View"  description="" />
+          <siteMapNode url="~/Pages/HorizonSeaView.aspx" title="Horizon Sea View"  description="" />
+          <siteMapNode url="~/Pages/DeluxeCityView.aspx" title="Deluxe City View"  description="" />
+          <siteMapNode url="~/Pages/DeluxeSeaView.aspx" title="Deluxe Sea View"  description="" />
+        </siteMapNode>
+        <siteMapNode url="~/Pages/Dining.aspx" title="Dining"  description="" />
+        <siteMapNode url="~/Pages/HealthAndLeisure.aspx" title="Health &amp; Leisure"  description="" />
+        <siteMapNode url="~/Pages/MemberProfile.aspx" title="Membership"  description="" />
+    </siteMapNode>
+</siteMap>

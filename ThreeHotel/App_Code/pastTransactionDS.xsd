@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="pastTransactionDS" targetNamespace="http://tempuri.org/pastTransactionDS.xsd" xmlns:mstns="http://tempuri.org/pastTransactionDS.xsd" xmlns="http://tempuri.org/pastTransactionDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="ThreeHotelConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ThreeHotelConnectionString (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.ThreeHotelConnectionString.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PastTransactionTableAdapter" GeneratorDataComponentClassName="PastTransactionTableAdapter" Name="PastTransaction" UserDataComponentName="PastTransactionTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ThreeHotelConnectionString (Web.config)" DbObjectName="ThreeHotel.dbo.PastTransaction" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT [Membership No], [Booking Reference], [Check In], [Check Out], Room, [No of Rooms], [Total Cost (SGD)], [Points Earned] FROM dbo.PastTransaction</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Membership No" DataSetColumn="Membership No" />
+              <Mapping SourceColumn="Booking Reference" DataSetColumn="Booking Reference" />
+              <Mapping SourceColumn="Check In" DataSetColumn="Check In" />
+              <Mapping SourceColumn="Check Out" DataSetColumn="Check Out" />
+              <Mapping SourceColumn="Room" DataSetColumn="Room" />
+              <Mapping SourceColumn="No of Rooms" DataSetColumn="No of Rooms" />
+              <Mapping SourceColumn="Total Cost (SGD)" DataSetColumn="Total Cost (SGD)" />
+              <Mapping SourceColumn="Points Earned" DataSetColumn="Points Earned" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="pastTransactionDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="pastTransactionDS" msprop:Generator_UserDSName="pastTransactionDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PastTransaction" msprop:Generator_TableClassName="PastTransactionDataTable" msprop:Generator_TableVarName="tablePastTransaction" msprop:Generator_TablePropName="PastTransaction" msprop:Generator_RowDeletingName="PastTransactionRowDeleting" msprop:Generator_RowChangingName="PastTransactionRowChanging" msprop:Generator_RowEvHandlerName="PastTransactionRowChangeEventHandler" msprop:Generator_RowDeletedName="PastTransactionRowDeleted" msprop:Generator_UserTableName="PastTransaction" msprop:Generator_RowChangedName="PastTransactionRowChanged" msprop:Generator_RowEvArgName="PastTransactionRowChangeEvent" msprop:Generator_RowClassName="PastTransactionRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Membership_x0020_No" msprop:Generator_ColumnVarNameInTable="columnMembership_No" msprop:Generator_ColumnPropNameInRow="Membership_No" msprop:Generator_ColumnPropNameInTable="Membership_NoColumn" msprop:Generator_UserColumnName="Membership No">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Booking_x0020_Reference" msprop:Generator_ColumnVarNameInTable="columnBooking_Reference" msprop:Generator_ColumnPropNameInRow="Booking_Reference" msprop:Generator_ColumnPropNameInTable="Booking_ReferenceColumn" msprop:Generator_UserColumnName="Booking Reference" type="xs:int" />
+              <xs:element name="Check_x0020_In" msprop:Generator_ColumnVarNameInTable="columnCheck_In" msprop:Generator_ColumnPropNameInRow="Check_In" msprop:Generator_ColumnPropNameInTable="Check_InColumn" msprop:Generator_UserColumnName="Check In" type="xs:dateTime" />
+              <xs:element name="Check_x0020_Out" msprop:Generator_ColumnVarNameInTable="columnCheck_Out" msprop:Generator_ColumnPropNameInRow="Check_Out" msprop:Generator_ColumnPropNameInTable="Check_OutColumn" msprop:Generator_UserColumnName="Check Out" type="xs:dateTime" />
+              <xs:element name="Room" msprop:Generator_ColumnVarNameInTable="columnRoom" msprop:Generator_ColumnPropNameInRow="Room" msprop:Generator_ColumnPropNameInTable="RoomColumn" msprop:Generator_UserColumnName="Room">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="No_x0020_of_x0020_Rooms" msprop:Generator_ColumnVarNameInTable="columnNo_of_Rooms" msprop:Generator_ColumnPropNameInRow="No_of_Rooms" msprop:Generator_ColumnPropNameInTable="No_of_RoomsColumn" msprop:Generator_UserColumnName="No of Rooms" type="xs:int" />
+              <xs:element name="Total_x0020_Cost_x0020__x0028_SGD_x0029_" msprop:Generator_ColumnVarNameInTable="_columnTotal_Cost__SGD_" msprop:Generator_ColumnPropNameInRow="_Total_Cost__SGD_" msprop:Generator_ColumnPropNameInTable="_Total_Cost__SGD_Column" msprop:Generator_UserColumnName="Total Cost (SGD)" type="xs:double" />
+              <xs:element name="Points_x0020_Earned" msprop:Generator_ColumnVarNameInTable="columnPoints_Earned" msprop:Generator_ColumnPropNameInRow="Points_Earned" msprop:Generator_ColumnPropNameInTable="Points_EarnedColumn" msprop:Generator_UserColumnName="Points Earned" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:PastTransaction" />
+      <xs:field xpath="mstns:Booking_x0020_Reference" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

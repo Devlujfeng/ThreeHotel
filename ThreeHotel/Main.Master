@@ -1,0 +1,93 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="ThreeHotel.Main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" type="text/css" href="StyleSheet.css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table class="auto-style3">
+            <tr>
+                <td class="auto-style4">
+                    <table class="tableStyle">
+                        <tr class="auto-style2">
+                            <td></td>
+                            <td>
+                                <div class ="navDiv">
+                                    <asp:ImageButton ID="imgLogo" runat="server" ImageUrl="~/Images (ThreeHotel)/team3logo.png" Width="130px" OnClick="imgLogo_Click"/>
+                                <%--<asp:Image ID="imgLogo" runat="server" ImageUrl="~/Images (ThreeHotel)/team3logo.png" Width="130px" />--%>
+                                <br />
+                                <asp:Menu ID="Menu1" runat="server" DataSourceID="SiteMapDataSource1" BackColor="#F7F6F3" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="0.9em" ForeColor="#7C6F57" StaticSubMenuIndent="10px">
+                                    <DynamicHoverStyle ForeColor="gold" />
+                                    <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="10px" />
+                                    <DynamicMenuStyle BackColor="#F7F6F3" />
+                                    <DynamicSelectedStyle BackColor="#F8EED4" />
+                                    <StaticHoverStyle BackColor="#7C6F57" ForeColor="White" />
+                                    <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                                    <StaticSelectedStyle BackColor="#BB9754" />
+                                </asp:Menu>
+                                </div>
+                            </td>
+                            <td class="auto-style3">
+                                <table class="tableStyle">
+                                    <tr>
+                                        <td class="auto-style7"; style="text-align: right">
+                                            <asp:Label ID="lblWelcome" runat="server" CssClass="welcomeLbl"></asp:Label>
+                                            &nbsp;&nbsp;
+                                            <asp:LinkButton ID="LinkButton1" runat="server" CssClass="linkBtn" OnClick="LinkButton1_Click" CausesValidation="False">Contact Us</asp:LinkButton>
+                                            &nbsp;&nbsp;
+                                            <asp:LinkButton ID="LinkButton2" runat="server" CssClass="linkBtn" OnClick="LinkButton2_Click" CausesValidation="False">Sign In</asp:LinkButton>
+                                        </td>
+                                        <td class="auto-style8"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class ="auto-style9">
+                                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+                                            </asp:ContentPlaceHolder>
+                                        </td>
+                                        <td class="auto-style5"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="footer1">
+                    <asp:Label ID="lblConnectWithUs" runat="server" Text="Connect with us:"></asp:Label>
+                    &nbsp;
+                    <asp:Image ID="imgFacebook" runat="server" ImageUrl="~/Images (ThreeHotel)/fblogo.png" Width="17" Height="17" />
+                    &nbsp;
+                    <asp:Image ID="imgTwitter" runat="server" ImageUrl="~/Images (ThreeHotel)/twitterlogo.png" Width="17" Height="17" />
+                    &nbsp;
+                    <asp:Image ID="imgInstagram" runat="server" ImageUrl="~/Images (ThreeHotel)/instalogo.png" Width="17" Height="17" />
+                    &nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td class="footer2">
+                    <asp:Label ID="lblAddress" runat="server" Text="25 Heng Mui Keng Terrace, 119615, Singapore"></asp:Label>
+                    <br />
+                    <asp:Label ID="lblTel" runat="server" Text="T:(65) 6737 3644"></asp:Label>
+                    &nbsp;
+                    <asp:Label ID="lblFax" runat="server" Text="F:(65) 6737 3257 "></asp:Label>
+                    <br />
+                    <br />
+                    <asp:Label ID="lblRightsReserved" runat="server" Text="© 2015 Three Hotel Management Ltd. All Rights Reserved. ICP license: 081263482"></asp:Label>
+                </td>
+            </tr>
+        </table>
+        <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="False" />
+        <br />
+    </div>
+    </form>
+</body>
+</html>

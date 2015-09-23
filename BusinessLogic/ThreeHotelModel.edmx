@@ -1,0 +1,582 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ThreeHotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BookingReferenceId" />
+          </Key>
+          <Property Name="BookingReferenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SpecialRateCode" Type="nchar" MaxLength="50" />
+          <Property Name="CheckIn" Type="date" Nullable="false" />
+          <Property Name="CheckOut" Type="date" Nullable="false" />
+          <Property Name="NoOfRooms" Type="int" Nullable="false" />
+          <Property Name="Tax" Type="float" Nullable="false" />
+          <Property Name="ServiceCharge" Type="float" Nullable="false" />
+          <Property Name="PointsEarned" Type="int" />
+          <Property Name="GuestId" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreditCardNo" Type="bigint" Nullable="false" />
+          <Property Name="CreditCardType" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="CardExpiredDate" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="TotalCost" Type="float" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Guest">
+          <Key>
+            <PropertyRef Name="GuestId" />
+          </Key>
+          <Property Name="GuestId" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Points" Type="int" />
+          <Property Name="Salutation" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="FamilyName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNo" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomType" />
+          </Key>
+          <Property Name="RoomType" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoomDesc" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="BedType" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoomBooked">
+          <Key>
+            <PropertyRef Name="RoomBookedId" />
+          </Key>
+          <Property Name="RoomBookedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingReferenceId" Type="int" Nullable="false" />
+          <Property Name="RoomType" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SpecialRate">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="SpecialRate" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="MembershipId" />
+          </Key>
+          <Property Name="MembershipId" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ThreeHotel.dbo.Occupancy' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Occupancy">
+          <Key>
+            <PropertyRef Name="BookingReferenceId" />
+            <PropertyRef Name="CheckIn" />
+            <PropertyRef Name="CheckOut" />
+            <PropertyRef Name="RoomType" />
+          </Key>
+          <Property Name="BookingReferenceId" Type="int" Nullable="false" />
+          <Property Name="CheckIn" Type="date" Nullable="false" />
+          <Property Name="CheckOut" Type="date" Nullable="false" />
+          <Property Name="RoomType" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ThreeHotel.dbo.PastTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PastTransaction">
+          <Key>
+            <PropertyRef Name="Member No" />
+            <PropertyRef Name="Booking Ref" />
+            <PropertyRef Name="Room" />
+            <PropertyRef Name="No of Rooms" />
+            <PropertyRef Name="Total Cost" />
+          </Key>
+          <Property Name="Member No" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Booking Ref" Type="int" Nullable="false" />
+          <Property Name="Check In" Type="varchar" MaxLength="30" />
+          <Property Name="Check Out" Type="varchar" MaxLength="30" />
+          <Property Name="Room" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="No of Rooms" Type="int" Nullable="false" />
+          <Property Name="Total Cost" Type="float" Nullable="false" />
+          <Property Name="Points" Type="int" />
+        </EntityType>
+        <Association Name="FK_Booking_Guest">
+          <End Role="Guest" Type="Self.Guest" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="GuestId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="GuestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_SpecialRate">
+          <End Role="SpecialRate" Type="Self.SpecialRate" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialRate">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="SpecialRateCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomBooked_ReferenceNo">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RoomBooked" Type="Self.RoomBooked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="BookingReferenceId" />
+            </Principal>
+            <Dependent Role="RoomBooked">
+              <PropertyRef Name="BookingReferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomBooked_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RoomBooked" Type="Self.RoomBooked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RoomType" />
+            </Principal>
+            <Dependent Role="RoomBooked">
+              <PropertyRef Name="RoomType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Guest">
+          <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="GuestId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="MembershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SearchOccupancy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+        </Function>
+        <EntityContainer Name="ThreeHotelModelStoreContainer">
+          <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Guest" EntityType="Self.Guest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomBooked" EntityType="Self.RoomBooked" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpecialRate" EntityType="Self.SpecialRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Occupancy" EntityType="Self.Occupancy" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Occupancy].[BookingReferenceId] AS [BookingReferenceId], 
+[Occupancy].[CheckIn] AS [CheckIn], 
+[Occupancy].[CheckOut] AS [CheckOut], 
+[Occupancy].[RoomType] AS [RoomType]
+FROM [dbo].[Occupancy] AS [Occupancy]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PastTransaction" EntityType="Self.PastTransaction" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[PastTransaction].[Member No] AS [Member No], 
+[PastTransaction].[Booking Ref] AS [Booking Ref], 
+[PastTransaction].[Check In] AS [Check In], 
+[PastTransaction].[Check Out] AS [Check Out], 
+[PastTransaction].[Room] AS [Room], 
+[PastTransaction].[No of Rooms] AS [No of Rooms], 
+[PastTransaction].[Total Cost] AS [Total Cost], 
+[PastTransaction].[Points] AS [Points]
+FROM [dbo].[PastTransaction] AS [PastTransaction]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Booking_Guest" Association="Self.FK_Booking_Guest">
+            <End Role="Guest" EntitySet="Guest" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_SpecialRate" Association="Self.FK_Booking_SpecialRate">
+            <End Role="SpecialRate" EntitySet="SpecialRate" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomBooked_ReferenceNo" Association="Self.FK_RoomBooked_ReferenceNo">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="RoomBooked" EntitySet="RoomBooked" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomBooked_Room" Association="Self.FK_RoomBooked_Room">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="RoomBooked" EntitySet="RoomBooked" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Guest" Association="Self.FK_Users_Guest">
+            <End Role="Guest" EntitySet="Guest" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ThreeHotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Guest">
+          <Key>
+            <PropertyRef Name="GuestId" />
+          </Key>
+          <Property Name="GuestId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Points" Type="Int32" />
+          <Property Name="Salutation" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FamilyName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Users_Guest" FromRole="Guest" ToRole="Users" />
+          <NavigationProperty Name="Bookings" Relationship="ThreeHotelModel.FK_Booking_Guest" FromRole="Guest" ToRole="Booking" />
+        </EntityType>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomType" />
+          </Key>
+          <Property Name="RoomType" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="RoomDesc" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="BedType" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RoomBookeds" Relationship="ThreeHotelModel.FK_RoomBooked_Room" FromRole="Room" ToRole="RoomBooked" />
+        </EntityType>
+        <EntityType Name="SpecialRate">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="SpecialRate1" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Bookings" Relationship="ThreeHotelModel.FK_Booking_SpecialRate" FromRole="SpecialRate" ToRole="Booking" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="MembershipId" />
+          </Key>
+          <Property Name="MembershipId" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Guest" Relationship="Self.FK_Users_Guest" FromRole="Users" ToRole="Guest" />
+        </EntityType>
+        <EntityType Name="Occupancy">
+          <Key>
+            <PropertyRef Name="BookingReferenceId" />
+            <PropertyRef Name="CheckIn" />
+            <PropertyRef Name="CheckOut" />
+            <PropertyRef Name="RoomType" />
+          </Key>
+          <Property Name="BookingReferenceId" Type="Int32" Nullable="false" />
+          <Property Name="CheckIn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CheckOut" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RoomType" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PastTransaction">
+          <Key>
+            <PropertyRef Name="Member_No" />
+            <PropertyRef Name="Booking_Ref" />
+            <PropertyRef Name="Room" />
+            <PropertyRef Name="No_of_Rooms" />
+            <PropertyRef Name="Total_Cost" />
+          </Key>
+          <Property Name="Member_No" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Booking_Ref" Type="Int32" Nullable="false" />
+          <Property Name="Check_In" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Check_Out" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Room" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="No_of_Rooms" Type="Int32" Nullable="false" />
+          <Property Name="Total_Cost" Type="Double" Nullable="false" />
+          <Property Name="Points" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Users_Guest">
+          <End Role="Guest" Type="Self.Guest" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="GuestId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="MembershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ThreeHotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Guests" EntityType="Self.Guest" />
+          <EntitySet Name="Rooms" EntityType="Self.Room" />
+          <EntitySet Name="SpecialRates" EntityType="Self.SpecialRate" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Occupancies" EntityType="Self.Occupancy" />
+          <EntitySet Name="PastTransactions" EntityType="Self.PastTransaction" />
+          <AssociationSet Name="FK_Users_Guest" Association="Self.FK_Users_Guest">
+            <End Role="Guest" EntitySet="Guests" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="SearchOccupancy" ReturnType="Collection(ThreeHotelModel.SearchOccupancy_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="Bookings" EntityType="ThreeHotelModel.Booking" />
+          <EntitySet Name="RoomBookeds" EntityType="ThreeHotelModel.RoomBooked" />
+          <AssociationSet Name="FK_Booking_Guest" Association="ThreeHotelModel.FK_Booking_Guest">
+            <End Role="Guest" EntitySet="Guests" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_SpecialRate" Association="ThreeHotelModel.FK_Booking_SpecialRate">
+            <End Role="SpecialRate" EntitySet="SpecialRates" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomBooked_ReferenceNo" Association="ThreeHotelModel.FK_RoomBooked_ReferenceNo">
+            <End Role="Booking" EntitySet="Bookings" />
+            <End Role="RoomBooked" EntitySet="RoomBookeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomBooked_Room" Association="ThreeHotelModel.FK_RoomBooked_Room">
+            <End Role="Room" EntitySet="Rooms" />
+            <End Role="RoomBooked" EntitySet="RoomBookeds" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="SearchOccupancy_Result">
+          <Property Type="Int32" Name="BookingReferenceId" Nullable="false" />
+          <Property Type="DateTime" Name="CheckIn" Nullable="false" />
+          <Property Type="DateTime" Name="CheckOut" Nullable="false" />
+          <Property Type="String" Name="RoomType" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="BookingReferenceId" />
+          </Key>
+          <Property Name="BookingReferenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SpecialRateCode" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="CheckIn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CheckOut" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NoOfRooms" Type="Int32" Nullable="false" />
+          <Property Name="Tax" Type="Double" Nullable="false" />
+          <Property Name="ServiceCharge" Type="Double" Nullable="false" />
+          <Property Name="PointsEarned" Type="Int32" />
+          <Property Name="GuestId" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="CreditCardNo" Type="Int64" Nullable="false" />
+          <Property Name="CreditCardType" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="CardExpiredDate" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="TotalCost" Type="Double" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Guest" Relationship="ThreeHotelModel.FK_Booking_Guest" FromRole="Booking" ToRole="Guest" />
+          <NavigationProperty Name="SpecialRate" Relationship="ThreeHotelModel.FK_Booking_SpecialRate" FromRole="Booking" ToRole="SpecialRate" />
+          <NavigationProperty Name="RoomBookeds" Relationship="ThreeHotelModel.FK_RoomBooked_ReferenceNo" FromRole="Booking" ToRole="RoomBooked" />
+        </EntityType>
+        <EntityType Name="RoomBooked">
+          <Key>
+            <PropertyRef Name="RoomBookedId" />
+          </Key>
+          <Property Name="RoomBookedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingReferenceId" Type="Int32" Nullable="false" />
+          <Property Name="RoomType" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Rate" Type="Double" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Booking" Relationship="ThreeHotelModel.FK_RoomBooked_ReferenceNo" FromRole="RoomBooked" ToRole="Booking" />
+          <NavigationProperty Name="Room" Relationship="ThreeHotelModel.FK_RoomBooked_Room" FromRole="RoomBooked" ToRole="Room" />
+        </EntityType>
+        <Association Name="FK_Booking_Guest">
+          <End Type="ThreeHotelModel.Guest" Role="Guest" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ThreeHotelModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Guest">
+              <PropertyRef Name="GuestId" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="GuestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_SpecialRate">
+          <End Type="ThreeHotelModel.SpecialRate" Role="SpecialRate" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ThreeHotelModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpecialRate">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="SpecialRateCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomBooked_ReferenceNo">
+          <End Type="ThreeHotelModel.Booking" Role="Booking" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ThreeHotelModel.RoomBooked" Role="RoomBooked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="BookingReferenceId" />
+            </Principal>
+            <Dependent Role="RoomBooked">
+              <PropertyRef Name="BookingReferenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomBooked_Room">
+          <End Type="ThreeHotelModel.Room" Role="Room" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ThreeHotelModel.RoomBooked" Role="RoomBooked" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="RoomType" />
+            </Principal>
+            <Dependent Role="RoomBooked">
+              <PropertyRef Name="RoomType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ThreeHotelModelStoreContainer" CdmEntityContainer="ThreeHotelEntities">
+          <EntitySetMapping Name="Guests">
+            <EntityTypeMapping TypeName="ThreeHotelModel.Guest">
+              <MappingFragment StoreEntitySet="Guest">
+                <ScalarProperty Name="GuestId" ColumnName="GuestId" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="Salutation" ColumnName="Salutation" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rooms">
+            <EntityTypeMapping TypeName="ThreeHotelModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+                <ScalarProperty Name="RoomDesc" ColumnName="RoomDesc" />
+                <ScalarProperty Name="BedType" ColumnName="BedType" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpecialRates">
+            <EntityTypeMapping TypeName="ThreeHotelModel.SpecialRate">
+              <MappingFragment StoreEntitySet="SpecialRate">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="SpecialRate1" ColumnName="SpecialRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ThreeHotelModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="MembershipId" ColumnName="MembershipId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Occupancies">
+            <EntityTypeMapping TypeName="ThreeHotelModel.Occupancy">
+              <MappingFragment StoreEntitySet="Occupancy">
+                <ScalarProperty Name="BookingReferenceId" ColumnName="BookingReferenceId" />
+                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
+                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PastTransactions">
+            <EntityTypeMapping TypeName="ThreeHotelModel.PastTransaction">
+              <MappingFragment StoreEntitySet="PastTransaction">
+                <ScalarProperty Name="Member_No" ColumnName="Member No" />
+                <ScalarProperty Name="Booking_Ref" ColumnName="Booking Ref" />
+                <ScalarProperty Name="Check_In" ColumnName="Check In" />
+                <ScalarProperty Name="Check_Out" ColumnName="Check Out" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="No_of_Rooms" ColumnName="No of Rooms" />
+                <ScalarProperty Name="Total_Cost" ColumnName="Total Cost" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SearchOccupancy" FunctionName="ThreeHotelModel.Store.SearchOccupancy">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ThreeHotelModel.SearchOccupancy_Result">
+                <ScalarProperty Name="BookingReferenceId" ColumnName="BookingReferenceId" />
+                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
+                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Bookings">
+            <EntityTypeMapping TypeName="ThreeHotelModel.Booking">
+              <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="CardExpiredDate" ColumnName="CardExpiredDate" />
+                <ScalarProperty Name="CreditCardType" ColumnName="CreditCardType" />
+                <ScalarProperty Name="CreditCardNo" ColumnName="CreditCardNo" />
+                <ScalarProperty Name="GuestId" ColumnName="GuestId" />
+                <ScalarProperty Name="PointsEarned" ColumnName="PointsEarned" />
+                <ScalarProperty Name="ServiceCharge" ColumnName="ServiceCharge" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="NoOfRooms" ColumnName="NoOfRooms" />
+                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
+                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
+                <ScalarProperty Name="SpecialRateCode" ColumnName="SpecialRateCode" />
+                <ScalarProperty Name="BookingReferenceId" ColumnName="BookingReferenceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomBookeds">
+            <EntityTypeMapping TypeName="ThreeHotelModel.RoomBooked">
+              <MappingFragment StoreEntitySet="RoomBooked">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+                <ScalarProperty Name="BookingReferenceId" ColumnName="BookingReferenceId" />
+                <ScalarProperty Name="RoomBookedId" ColumnName="RoomBookedId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

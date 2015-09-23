@@ -1,0 +1,176 @@
+﻿html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+}
+
+.nav, .content, .footer1, .footer2 {
+    display: block;
+}
+
+.footer1 {
+    position: relative;
+    background-color: #BB9754;
+    font-family: Verdana;
+    font-Size: 0.75em;
+    text-align: right;
+    height: 25px;
+    line-height: 25px;
+}
+
+.footer1>.png {
+    position: absolute;
+    top: 50%;
+}
+
+.footer2 {
+    background-color: white;
+    font-family: Verdana;
+    font-Size: 0.6em;
+    text-align: center;
+}
+
+.tableStyle {
+    width: 750px;
+    height: 100%;
+    position: relative;
+}
+
+.navDiv {
+    background-color: white;
+    vertical-align: text-top;
+    height:100%;
+}
+
+
+.linkBtn {
+  color: Black;
+  text-decoration: none;
+  font-family: Verdana;
+  font-Size: 0.8em;
+}
+
+.welcomeLbl {
+  color: Black;
+  font-family: Verdana;
+  font-Size: 0.8em;
+}
+
+auto-style1{
+    height: 100%; 
+    width: 100%;
+}
+
+.auto-style2 {
+    width: 100%;
+    height: 100%;
+}
+
+.auto-style3 {
+    width: 100%;
+}
+
+.auto-style5 {
+    width: 480px;
+    height: 254px;
+}
+
+.auto-style6 {
+    width: 750px;
+    height: 254px;
+}
+
+.auto-style7 {
+    width: 3013px;
+    height: 37px;
+}
+
+.auto-style8 {
+    width: 480px;
+    height: 37px;
+}
+.auto-style9 {
+             width: 750px;
+            height: 254px;
+}
+
+/*Content Page css*/
+
+.img {
+    height: 355px;
+    width: 720px;
+}
+
+.text {
+    font-family:Verdana;
+    font-size: small;
+    text-align: justify;
+}
+
+.sidePanel {
+    width: 190px;
+}
+
+.sidePanelLabel {
+    font-weight:bold; 
+    color:#BB9754;
+}
+
+.sidePanelText {
+    font-family:Verdana;
+    font-size: x-small;
+    text-align: justify;
+}
+
+hr1 {
+    border:0; 
+    width:100%; 
+    color:#BB9754; 
+    height:5px;
+}
+
+hr2 {
+    border:0; 
+    width:100%; 
+    color:#BB9754; 
+    height:2px;
+}
+
+hr3 {
+    border:0; 
+    width:100%; 
+    color:#BB9754; 
+    height:1px;
+}
+
+/*Room Reservation Input Page css*/
+
+.Initial
+  {
+    display: block;
+    padding: 4px 18px 4px 18px;
+    float: left;
+    background: url('../images (ThreeHotel)/InitialImage.png') no-repeat right top;
+    color: Black;
+    font-weight: bold;
+  }
+  .Initial:hover
+  {
+    color: White;
+    background: url('../images (ThreeHotel)/SelectedButton.png') no-repeat right top;
+  }
+  .Clicked
+  {
+    float: left;
+    display: block;
+    background: url('../images (ThreeHotel)/SelectedButton.png') no-repeat right top;
+    padding: 4px 18px 4px 18px;
+    color: Black;
+    font-weight: bold;
+    color: White;
+  }
+
+  
+
